@@ -10,7 +10,9 @@ const Main = () => {
                 <Navbar />
             </div>
             <Outlet />
-            <Footer />
+            <div className='bg-[#161634]'>
+                <Footer />
+            </div>
         </div>
     );
 };
