@@ -1,13 +1,22 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../../Providers/AuthProviders';
 
 const Navbar = () => {
+    const { user, logout } = useContext(AuthContext)
+
+    const handlelogout = () => {
+        logout()
+            .then(() => { })
+            .catch(error => console.log(error))
+    }
     const nav = (
         <>
             <li><Link to="/" className='text-[#FE5F75]'>Home</Link></li>
             <li><Link to="/featured" className='text-[#FE5F75]'>Featured Items</Link></li>
             <li><Link to="/Shop" className='text-[#FE5F75]'>Shop</Link></li>
             <li><Link to="/ContactUs" className='text-[#FE5F75]'>Contact</Link></li>
+            <li><Link to="/dashboard" className='text-[#FE5F75]'>Dashboard</Link></li>
             {/* <li><Link to="/" className='text-[#FE5F75]'>New Products</Link></li> */}
         </>
     );
@@ -38,10 +47,19 @@ const Navbar = () => {
                     {nav}
                 </ul>
             </div>
-            <div className="navbar-end">
-                <li><Link to="login" className='btn bg-[#FE5F75] border-0'>Login</Link></li>
-                <li><Link to="signup" className='btn bg-[#FE5F75] border-0'>SignUp</Link></li>
-            </div>
+            {
+                user ? <>
+                    <div className='navbar-end'>
+                        <li><button onClick={handlelogout} className='btn bg-[#FE5F75] border-0'>Logout</button></li>
+                    </div>
+                </> :
+                    <>
+                        <div className="navbar-end">
+                            <li><Link to="/login" className='btn bg-[#FE5F75] border-0'>Login</Link></li>
+                            <li><Link to="/signup" className='btn bg-[#FE5F75] border-0'>SignUp</Link></li>
+                        </div>
+                    </>
+            }
         </div>
     );
 };
