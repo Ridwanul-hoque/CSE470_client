@@ -1,7 +1,7 @@
 import {
     createBrowserRouter,
-    
 } from "react-router-dom";
+
 import Main from "../Layout/Main";
 import Home from "../Pages/Home/Home";
 import ContactUs from "../Pages/ContactUs/ContactUs";
@@ -11,12 +11,9 @@ import Shop from "../Pages/Shop/Shop";
 import Feature from "../Pages/Feature/Feature";
 import Dashboard from "../Pages/Dashboard/Dashboard";
 import UserProfile from "../Pages/Dashboard/UserProfile/UserProfile";
-
-import PrivateRoutes from "./PrivateRoutes";
 import Sellitem from "../Pages/Dashboard/SellItem/Sellitem";
 
-
-
+import PrivateRoutes from "./PrivateRoutes";
 
 export const router = createBrowserRouter([
     {
@@ -32,11 +29,13 @@ export const router = createBrowserRouter([
                 element: <Feature></Feature>
             },
             {
-                path: '/Shop',
+                path: '/shop', // ✅ Changed to lowercase for consistency
                 element: <Shop></Shop>
+                // ✅ OR use this if you want to protect the page:
+                // element: <PrivateRoutes><Shop /></PrivateRoutes>
             },
             {
-                path: '/ContactUs',
+                path: '/contactus',
                 element: <ContactUs></ContactUs>
             },
             {
@@ -50,18 +49,17 @@ export const router = createBrowserRouter([
         ]
     },
     {
-        path: 'dashboard',
-        element: <PrivateRoutes><Dashboard></Dashboard></PrivateRoutes>,
-        children:[
+        path: '/dashboard',
+        element: <PrivateRoutes><Dashboard /></PrivateRoutes>,
+        children: [
             {
-                path:'profile',
-                element: <PrivateRoutes><UserProfile></UserProfile></PrivateRoutes>
+                path: 'profile',
+                element: <PrivateRoutes><UserProfile /></PrivateRoutes>
             },
             {
                 path: 'sellItems',
-                element:<PrivateRoutes><Sellitem></Sellitem></PrivateRoutes>
+                element: <PrivateRoutes><Sellitem /></PrivateRoutes>
             }
         ]
-
     }
 ]);
