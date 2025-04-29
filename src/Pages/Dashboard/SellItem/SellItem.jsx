@@ -1,9 +1,10 @@
 import React from 'react';
+import ItemUpload from './itemup/itemup';
 
 const Sellitem = () => {
     return (
         <div>
-            you can sell item here soon.........
+            <ItemUpload></ItemUpload>
         </div>
     );
 };
