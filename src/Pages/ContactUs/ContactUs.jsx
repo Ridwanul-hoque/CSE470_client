@@ -1,6 +1,7 @@
 import React from "react";
 
 const ContactUs = () => {
+<<<<<<< HEAD
   return (
     <div
       className="min-h-screen bg-cover bg-center flex items-center justify-center"
@@ -44,6 +45,11 @@ const ContactUs = () => {
               Send Message
             </button>
           </form>
+=======
+    return (
+        <div>
+            this is contact
+>>>>>>> cca274f706dca853370fa1139a5ab87cce5bc7a8
         </div>
 
         {/* Right Side: Info */}
