@@ -8,10 +8,11 @@ import { IoIosContact } from "react-icons/io"
 import { MdOutlineViewInAr } from "react-icons/md";
 import { GrContactInfo } from "react-icons/gr";
 import { CiSquareQuestion } from "react-icons/ci";
+import useAdmin from '../../Hooks/useAdmin';
 
 
 const Dashboard = () => {
-    // const [isAdmin] = useAdmin();/
+    const [isAdmin] = useAdmin();
 
 
     return (
@@ -19,7 +20,7 @@ const Dashboard = () => {
             {/* Sidebar */}
             <div className='w-64 min-h-screen bg-[#0D0D2B] text-[#FE5F75]'>
                 <ul className="menu">
-                    <li>
+                    {/* <li>
                         <NavLink to="/dashboard/profile">
                             <FaHome /> User Profile
                         </NavLink>
@@ -28,10 +29,10 @@ const Dashboard = () => {
                         <NavLink to="/dashboard/sellItems">
                             <FaUser /> Sell Items
                         </NavLink>
-                    </li>
+                    </li> */}
 
-                    
-                    {/* {
+
+                    {
                         isAdmin ? (
                             <>
                                 <li>
@@ -46,42 +47,43 @@ const Dashboard = () => {
                                 </li>
 
                                 <li>
-                                    <NavLink to="/dashboard/approveStatus">
-                                    <CiSquareQuestion /> Approved Contact Request
+                                    <NavLink to="/dashboard/approval">
+                                        <CiSquareQuestion /> Business Approval
                                     </NavLink>
                                 </li>
+                                {/* <li>
+                                    <NavLink to="/dashboard/approval">
+                                        Business Approval
+                                    </NavLink>
+                                </li> */}
 
                             </>
                         ) : (
                             <>
                                 <li>
-                                    <NavLink to="/dashboard/user">
+                                    <NavLink to="/dashboard/profile">
                                         <IoIosContact />Profile
                                     </NavLink>
                                 </li>
                                 <li>
-                                    <NavLink to="/dashboard/addData">
-                                        <FaAdjust></FaAdjust>Add Biodata
+                                    <NavLink to="/dashboard/sellItems">
+                                        <FaAdjust></FaAdjust>Sell Items
                                     </NavLink>
                                 </li>
                                 <li>
-                                    <NavLink to="/dashboard/viewData">
-                                        <MdOutlineViewInAr />View Biodata
+                                    <NavLink to="/dashboard/business">
+                                        <MdOutlineViewInAr />Business Center
                                     </NavLink>
                                 </li>
-                                <li>
-                                    <NavLink to="/dashboard/contact">
-                                        <GrContactInfo /> My Contact Request
+                                {/* {/* <li>
+                                    <NavLink to="/dashboard/approval">
+                                        <GrContactInfo /> Approval
                                     </NavLink>
-                                </li>
-                                <li>
-                                    <NavLink to="/dashboard/favourite">
-                                        Favourites Biodata
-                                    </NavLink>
-                                </li>
+                                </li> */}
+
                             </>
                         )
-                    } */}
+                    }
                     <div className="divider"></div>
                     <li>
 

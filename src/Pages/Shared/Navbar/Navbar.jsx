@@ -1,9 +1,11 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../Providers/AuthProviders';
+import useAdmin from '../../../Hooks/useAdmin';
 
 const Navbar = () => {
     const { user, logout } = useContext(AuthContext)
+    const [isAdmin] = useAdmin();
 
     const handlelogout = () => {
         logout()
@@ -16,7 +18,14 @@ const Navbar = () => {
             <li><Link to="/featured" className='text-[#FE5F75]'>Featured Items</Link></li>
             <li><Link to="/Shop" className='text-[#FE5F75]'>Shop</Link></li>
             <li><Link to="/ContactUs" className='text-[#FE5F75]'>Contact</Link></li>
-            <li><Link to="/dashboard" className='text-[#FE5F75]'>Dashboard</Link></li>
+            <li>
+                <Link
+                    to={isAdmin ? '/dashboard/adminDashboard' : '/dashboard/profile'}
+                    className="block px-4 py-2 text-[#FE5F75] transition"
+                >
+                    Dashboard
+                </Link>
+            </li>
             {/* <li><Link to="/" className='text-[#FE5F75]'>New Products</Link></li> */}
         </>
     );
