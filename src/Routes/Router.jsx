@@ -14,6 +14,11 @@ import UserProfile from "../Pages/Dashboard/UserProfile/UserProfile";
 import Sellitem from "../Pages/Dashboard/SellItem/Sellitem";
 
 import PrivateRoutes from "./PrivateRoutes";
+import BusinessProfile from "../Pages/Dashboard/BusinessProfile.jsx/BusinessProfile";
+import AdminRoutes from "./AdminRoutes";
+import AdminDashboard from "../Pages/Dashboard/AdminDashboard/AdminDashboard";
+import Approval from "../Pages/Dashboard/Approval/Approval";
+import ManageUser from "../Pages/Dashboard/ManageUser/ManageUser";
 
 export const router = createBrowserRouter([
     {
@@ -35,7 +40,7 @@ export const router = createBrowserRouter([
                 // element: <PrivateRoutes><Shop /></PrivateRoutes>
             },
             {
-                path: '/contactus',
+                path: '/contact',
                 element: <ContactUs></ContactUs>
             },
             {
@@ -59,7 +64,25 @@ export const router = createBrowserRouter([
             {
                 path: 'sellItems',
                 element: <PrivateRoutes><Sellitem /></PrivateRoutes>
+            },
+            {
+                path: 'business',
+                element: <PrivateRoutes><BusinessProfile /></PrivateRoutes>
+            },
+            {
+                path: 'adminDashboard',
+                element: <AdminRoutes><AdminDashboard /></AdminRoutes>
+            },
+            {
+                path: 'manageUsers',
+                element: <AdminRoutes><ManageUser /></AdminRoutes>
+            },
+            {
+                path: 'approval',
+                element: <AdminRoutes><Approval /></AdminRoutes>
             }
+            
+            
         ]
     }
 ]);
