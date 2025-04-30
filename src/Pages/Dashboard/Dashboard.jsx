@@ -51,6 +51,7 @@ const Dashboard = () => {
                                         <CiSquareQuestion /> Business Approval
                                     </NavLink>
                                 </li>
+                                
                                 {/* <li>
                                     <NavLink to="/dashboard/approval">
                                         Business Approval
@@ -73,6 +74,11 @@ const Dashboard = () => {
                                 <li>
                                     <NavLink to="/dashboard/business">
                                         <MdOutlineViewInAr />Business Center
+                                    </NavLink>
+                                </li>
+                                <li>
+                                    <NavLink to="/dashboard/addReview">
+                                        <CiSquareQuestion /> Add Review 
                                     </NavLink>
                                 </li>
                                 {/* {/* <li>

@@ -19,6 +19,7 @@ import AdminRoutes from "./AdminRoutes";
 import AdminDashboard from "../Pages/Dashboard/AdminDashboard/AdminDashboard";
 import Approval from "../Pages/Dashboard/Approval/Approval";
 import ManageUser from "../Pages/Dashboard/ManageUser/ManageUser";
+import AddReview from "../Pages/Dashboard/addReview/addReview";
 
 export const router = createBrowserRouter([
     {
@@ -68,6 +69,18 @@ export const router = createBrowserRouter([
             {
                 path: 'business',
                 element: <PrivateRoutes><BusinessProfile /></PrivateRoutes>
+            },
+            {
+                path: 'business',
+                element: <PrivateRoutes><BusinessProfile /></PrivateRoutes>
+            },
+            {
+                path: 'business',
+                element: <PrivateRoutes><BusinessProfile /></PrivateRoutes>
+            },
+            {
+                path: 'addReview',
+                element: <PrivateRoutes><AddReview/></PrivateRoutes>
             },
             {
                 path: 'adminDashboard',
