@@ -5,8 +5,8 @@ import UserProducts from './product/usersp';
 const Feature = () => {
     return (
         <div className='bg-[#0D0D2B]'>
-           <Vendor></Vendor>
-           <UserProducts></UserProducts>
+           {/* <Vendor></Vendor>
+           <UserProducts></UserProducts> */}
         </div>
     );
 };

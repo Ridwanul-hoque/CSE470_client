@@ -1,25 +1,46 @@
+import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 const Cart = () => {
   const [cart, setCart] = useState([]);
-  
-  // Load the cart from localStorage on component mount
+  const [products, setProducts] = useState([]);
+
   useEffect(() => {
-    const storedCart = JSON.parse(localStorage.getItem('cart')) || [];
-    setCart(storedCart);
+    const fetchCart = async () => {
+      const res = await axios.get("http://localhost:5000/cart");
+      setCart(res.data);
+    };
+    fetchCart();
   }, []);
 
-  // Function to remove item from cart
-  const removeItem = (id) => {
-    const updatedCart = cart.filter(item => item.id !== id);
-    setCart(updatedCart);
-    localStorage.setItem('cart', JSON.stringify(updatedCart)); // Save updated cart in localStorage
+  const removeItem = async (id, tag, quantity = 1) => {
+    try {
+      await axios.delete(`http://localhost:5000/cart/${id}`);
+      setCart(prev => prev.filter(item => item._id !== id));
+
+      if (tag === "used") {
+        setProducts(prev =>
+          prev.map(p => p._id === id ? { ...p, disabled: false } : p)
+        );
+      }
+
+      if (tag === "business") {
+        setProducts(prev =>
+          prev.map(p =>
+            p._id === id ? { ...p, quantity: p.quantity + quantity } : p
+          )
+        );
+      }
+    } catch (err) {
+      console.error("Error removing item:", err);
+    }
   };
+
 
   // Calculate total number of items in the cart
   const getTotalItems = () => {
-    return cart.reduce((total, item) => total + item.quantity, 0);
+    return cart.reduce((total, item) => total + (item.quantity || 1), 0);
   };
 
   return (
@@ -35,12 +56,18 @@ const Cart = () => {
           <ul className="space-y-4">
             {cart.map((item, index) => (
               <li key={index} className="flex justify-between items-center border p-4 rounded">
-                <div>
-                  <p className="font-semibold">{item.name}</p>
-                  <p>${item.price} x {item.quantity}</p>
+                <div className="flex items-center space-x-4">
+                  <img src={item.image} alt={item.productName} className="w-16 h-16 object-cover rounded" />
+                  <div>
+                    <p className="font-semibold">{item.productName}</p>
+                    <p>
+                      ${item.price}
+                      {item.quantity ? ` x ${item.quantity}` : ""}
+                    </p>
+                  </div>
                 </div>
                 <button
-                  onClick={() => removeItem(item.id)}
+                  onClick={() => removeItem(item._id, item.tag, item.quantity)}
                   className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600"
                 >
                   Remove

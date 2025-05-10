@@ -1,5 +1,6 @@
 import React from "react";
 import { FaFacebookF, FaTwitter, FaInstagram, FaLinkedinIn } from "react-icons/fa";
+import icon from '../../../../src/assets/icon2.png'
 
 const Footer = () => {
   return (
@@ -13,6 +14,7 @@ const Footer = () => {
             <p className="mt-3 text-sm">
               Your one-stop marketplace for both used and new products. Sell or buy with ease!
             </p>
+            <img src={icon} alt="" />
           </div>
 
           {/* Quick Links */}

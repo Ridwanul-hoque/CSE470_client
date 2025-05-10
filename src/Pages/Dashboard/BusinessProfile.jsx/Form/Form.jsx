@@ -47,7 +47,7 @@ const Form = () => {
             <input name="startYear" type="date" placeholder="Business Start Year" onChange={handleChange} className="input input-bordered w-full" required />
             <input name="logoUrl" type="text" placeholder="Logo Image URL (imgbb)" onChange={handleChange} className="input input-bordered w-full" required />
             <textarea name="description" placeholder="Description" onChange={handleChange} className="textarea textarea-bordered w-full" required />
-            <button type="submit" className="btn btn-primary w-full">Submit</button>
+            <button type="submit" className="btn btn-primary w-full bg-[#0D0D2B] text-[#FE5F75]">Submit</button>
         </form>
     );
 };

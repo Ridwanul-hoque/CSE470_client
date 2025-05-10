@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../Providers/AuthProviders';
 import useAdmin from '../../../Hooks/useAdmin';
+import icon from '../../../../src/assets/icon2.png'
 
 const Navbar = () => {
     const { user, logout } = useContext(AuthContext)
@@ -17,7 +18,7 @@ const Navbar = () => {
             <li><Link to="/" className='text-[#FE5F75]'>Home</Link></li>
             <li><Link to="/featured" className='text-[#FE5F75]'>Featured Items</Link></li>
             <li><Link to="/Shop" className='text-[#FE5F75]'>Shop</Link></li>
-            <li><Link to="/ContactUs" className='text-[#FE5F75]'>Contact</Link></li>
+            <li><Link to="/contact" className='text-[#FE5F75]'>Contact</Link></li>
             <li>
                 <Link
                     to={isAdmin ? '/dashboard/adminDashboard' : '/dashboard/profile'}
@@ -49,6 +50,7 @@ const Navbar = () => {
                         <li><a>Item 3</a></li>
                     </ul>
                 </div>
+                <img src={icon} alt="" />
                 <a className="btn btn-ghost text-xl text-[#FE5F75]">SwiftMart</a>
             </div>
             <div className="navbar-center hidden lg:flex">
