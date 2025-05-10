@@ -12,6 +12,7 @@ import Feature from "../Pages/Feature/Feature";
 import Dashboard from "../Pages/Dashboard/Dashboard";
 import UserProfile from "../Pages/Dashboard/UserProfile/UserProfile";
 import Sellitem from "../Pages/Dashboard/SellItem/Sellitem";
+import Cart from "../Pages/Cart/Cart"
 
 import PrivateRoutes from "./PrivateRoutes";
 import BusinessProfile from "../Pages/Dashboard/BusinessProfile.jsx/BusinessProfile";
@@ -33,6 +34,10 @@ export const router = createBrowserRouter([
             {
                 path: '/featured',
                 element: <Feature></Feature>
+            }, 
+            {
+                path: '/cart',
+                element: <Cart></Cart>
             },
             {
                 path: '/shop', // ✅ Changed to lowercase for consistency
