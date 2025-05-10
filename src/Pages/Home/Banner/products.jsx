@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import P1 from "../../../assets/p1.jpeg";
 import P2 from "../../../assets/p2.jpeg";
 import P3 from "../../../assets/p3.jpeg";
@@ -44,8 +45,10 @@ const demoProducts = [
 ];
 
 const Products = () => {
+  const navigate = useNavigate();
+
   const handleSeeMore = () => {
-    alert('See more products functionality coming soon!');
+    navigate('/shop'); // Redirect to the shop page
   };
 
   return (
@@ -73,6 +76,7 @@ const Products = () => {
             <p>{product.description}</p>
             <p style={{ fontWeight: 'bold' }}>{product.price}</p>
             <button
+              onClick={handleSeeMore}
               style={{
                 padding: '8px 16px',
                 background: '#007BFF',
@@ -82,7 +86,7 @@ const Products = () => {
                 cursor: 'pointer',
               }}
             >
-              Add to Cart
+              See More
             </button>
           </div>
         ))}

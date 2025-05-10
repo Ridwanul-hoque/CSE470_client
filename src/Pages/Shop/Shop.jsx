@@ -8,14 +8,28 @@ const Shop = () => {
   const [filterTag, setFilterTag] = useState("all");
   const [sortOrder, setSortOrder] = useState("default");
   const [cartItems, setCartItems] = useState(() => JSON.parse(localStorage.getItem("cart")) || []);
+  const [wishlist, setWishlist] = useState(() => JSON.parse(localStorage.getItem("wishlist")) || []);
   const navigate = useNavigate();
 
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(cartItems));
   }, [cartItems]);
 
+    useEffect(() => {
+    localStorage.setItem("wishlist", JSON.stringify(wishlist));
+  }, [wishlist]);
+
   const handleAddToCart = (product) => {
     setCartItems((prev) => [...prev, product]);
+  };
+
+    const handleAddToWishlist = (product) => {
+    // Avoid adding duplicates to the wishlist
+    if (!wishlist.some((item) => item.id === product.id)) {
+      setWishlist((prev) => [...prev, product]);
+    } else {
+      alert("This product is already in your wishlist.");
+    }
   };
 
   const filtered = productsData.filter(product =>
@@ -44,6 +58,7 @@ const Shop = () => {
             key={product.id}
             product={product}
             onAddToCart={handleAddToCart}
+            onAddToWishlist={handleAddToWishlist}
           />
         ))}
       </div>

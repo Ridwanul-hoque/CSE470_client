@@ -1,6 +1,7 @@
 import React from "react";
+import { FaHeart } from "react-icons/fa"; // Import the heart icon
 
-const ProductCard = ({ product, onAddToCart }) => {
+const ProductCard = ({ product, onAddToCart, onAddToWishlist }) => {
   return (
     <div className="border rounded-2xl shadow-md p-4 flex flex-col items-center bg-white">
       <img
@@ -20,6 +21,12 @@ const ProductCard = ({ product, onAddToCart }) => {
           className="bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded-md text-sm"
         >
           Add to Cart
+        </button>
+        <button
+          onClick={() => onAddToWishlist(product)} // Add to wishlist handler
+          className="text-red-500 hover:text-red-600 px-3 py-1 rounded-md text-sm flex items-center"
+        >
+          <FaHeart className="mr-1" /> Wishlist
         </button>
       </div>
     </div>

@@ -26,7 +26,12 @@ const Navbar = () => {
                     Dashboard
                 </Link>
             </li>
-            {/* <li><Link to="/" className='text-[#FE5F75]'>New Products</Link></li> */}
+           {/* <li><Link to="/" className='text-[#FE5F75]'>New Products</Link></li> */}
+            <li>
+                <Link to="/wishlist" className="text-[#FE5F75]">
+                    Wishlist
+                </Link>
+            </li>
         </>
     );
 
