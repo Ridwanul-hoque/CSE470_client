@@ -21,6 +21,10 @@ import AdminDashboard from "../Pages/Dashboard/AdminDashboard/AdminDashboard";
 import Approval from "../Pages/Dashboard/Approval/Approval";
 import ManageUser from "../Pages/Dashboard/ManageUser/ManageUser";
 import AddReview from "../Pages/Dashboard/addReview/addReview";
+import UserItems from "../Pages/Dashboard/userItems/userItems";
+import Report from "../Pages/Dashboard/Report/Report";
+import AdminReport from "../Pages/Dashboard/AdminReport/AdminReport";
+import ResolvedReport from "../Pages/Dashboard/resolvedReport/resolvedReport";
 
 export const router = createBrowserRouter([
     {
@@ -68,6 +72,10 @@ export const router = createBrowserRouter([
                 element: <PrivateRoutes><UserProfile /></PrivateRoutes>
             },
             {
+                path: 'addReview',
+                element: <PrivateRoutes><AddReview/></PrivateRoutes>
+            },
+            {
                 path: 'sellItems',
                 element: <PrivateRoutes><Sellitem /></PrivateRoutes>
             },
@@ -76,17 +84,18 @@ export const router = createBrowserRouter([
                 element: <PrivateRoutes><BusinessProfile /></PrivateRoutes>
             },
             {
-                path: 'business',
-                element: <PrivateRoutes><BusinessProfile /></PrivateRoutes>
+                path: 'report',
+                element: <PrivateRoutes><Report /></PrivateRoutes>
             },
             {
-                path: 'business',
-                element: <PrivateRoutes><BusinessProfile /></PrivateRoutes>
+                path: 'userItems',
+                element: <PrivateRoutes><UserItems></UserItems></PrivateRoutes>
             },
             {
-                path: 'addReview',
-                element: <PrivateRoutes><AddReview/></PrivateRoutes>
+                path: 'userReports',
+                element: <PrivateRoutes><ResolvedReport></ResolvedReport></PrivateRoutes>
             },
+            
             {
                 path: 'adminDashboard',
                 element: <AdminRoutes><AdminDashboard /></AdminRoutes>
@@ -98,6 +107,10 @@ export const router = createBrowserRouter([
             {
                 path: 'approval',
                 element: <AdminRoutes><Approval /></AdminRoutes>
+            },
+            {
+                path: 'adminReport',
+                element: <AdminRoutes><AdminReport /></AdminRoutes>
             }
             
             

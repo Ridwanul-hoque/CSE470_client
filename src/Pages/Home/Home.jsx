@@ -2,6 +2,8 @@ import React from 'react';
 import Banner from './Banner/Banner';
 
 import Review from '../Review/Review';
+import Promotion from '../Promotion/Promotion';
+import { Element } from 'react-scroll';
 
 const Home = () => {
     return (
@@ -12,9 +14,14 @@ const Home = () => {
 
             </div>
             {/* <Products></Products> */}
+            <Element name="featured-section">
+                <Promotion />
+            </Element>
 
-            <Review></Review>
-            
+            <Element name="review-section">
+                <Review />
+            </Element>
+
         </div>
     );
 };
