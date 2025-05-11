@@ -1,4 +1,5 @@
 import React from "react";
+import { FaHeart } from "react-icons/fa"; // Import the heart icon
 
 const ProductCard = ({ product, onAddToCart, disabled = false }) => {
   return (
@@ -42,6 +43,14 @@ const ProductCard = ({ product, onAddToCart, disabled = false }) => {
             : "Already in Cart"
           : "Add to Cart"}
       </button>
+              {/* Wishlist Button */}
+        <button
+          onClick={() => onAddToWishlist(product)} // Add to wishlist handler
+          className="px-4 py-2 rounded text-white bg-red-500 hover:bg-red-600 transition duration-200 flex items-center space-x-1"
+        >
+          <FaHeart />
+          <span>Wishlist</span>
+        </button>
     </div>
   );
 };

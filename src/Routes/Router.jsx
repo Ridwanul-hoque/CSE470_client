@@ -12,7 +12,8 @@ import Feature from "../Pages/Feature/Feature";
 import Dashboard from "../Pages/Dashboard/Dashboard";
 import UserProfile from "../Pages/Dashboard/UserProfile/UserProfile";
 import Sellitem from "../Pages/Dashboard/SellItem/Sellitem";
-import Cart from "../Pages/Cart/Cart"
+import Cart from "../Pages/Cart/Cart";
+import Wishlist from '../Pages/wishlist/wl';
 
 import PrivateRoutes from "./PrivateRoutes";
 import BusinessProfile from "../Pages/Dashboard/BusinessProfile.jsx/BusinessProfile";
@@ -21,10 +22,12 @@ import AdminDashboard from "../Pages/Dashboard/AdminDashboard/AdminDashboard";
 import Approval from "../Pages/Dashboard/Approval/Approval";
 import ManageUser from "../Pages/Dashboard/ManageUser/ManageUser";
 import AddReview from "../Pages/Dashboard/addReview/addReview";
+import Track from "../Pages/Dashboard/orderTrack/track";
 import UserItems from "../Pages/Dashboard/userItems/userItems";
 import Report from "../Pages/Dashboard/Report/Report";
 import AdminReport from "../Pages/Dashboard/AdminReport/AdminReport";
 import ResolvedReport from "../Pages/Dashboard/resolvedReport/resolvedReport";
+
 
 export const router = createBrowserRouter([
     {
@@ -60,6 +63,10 @@ export const router = createBrowserRouter([
             {
                 path: '/signup',
                 element: <SignUp></SignUp>
+            },
+            {
+                path: '/wishlist', // Added Wishlist route
+                element: <Wishlist></Wishlist>
             }
         ]
     },
@@ -95,6 +102,11 @@ export const router = createBrowserRouter([
                 path: 'userReports',
                 element: <PrivateRoutes><ResolvedReport></ResolvedReport></PrivateRoutes>
             },
+            {
+
+                path: 'orderTrack', // Added Track route
+                element: <PrivateRoutes><Track /></PrivateRoutes>
+            },
             
             {
                 path: 'adminDashboard',
@@ -111,6 +123,7 @@ export const router = createBrowserRouter([
             {
                 path: 'adminReport',
                 element: <AdminRoutes><AdminReport /></AdminRoutes>
+
             }
             
             

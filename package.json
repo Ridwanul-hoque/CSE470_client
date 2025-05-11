@@ -17,6 +17,7 @@
     "firebase": "^11.6.0",
     "jsonwebtoken": "^9.0.2",
     "localforage": "^1.10.0",
+    "lucide-react": "^0.509.0",
     "match-sorter": "^8.0.0",
     "motion": "^12.5.0",
     "react": "^19.0.0",
