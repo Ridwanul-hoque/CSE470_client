@@ -106,7 +106,12 @@ const Dashboard = () => {
                                         <GrContactInfo /> Approval
                                     </NavLink>
                                 </li> */}
-
+                                <li>
+                                    <NavLink to="/dashboard/orderTrack">
+                                        <VscPreview /> Order Tracker
+                                    </NavLink>
+                                </li>
+                            
                             </>
                         )
                     }

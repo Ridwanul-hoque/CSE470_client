@@ -30,7 +30,7 @@ const userProducts = [
 const UserProducts = () => {
   const handleAddToCart = (productName) => {
     alert(`${productName} has been added to your cart!`);
-  };
+  }; 
 
   return (
     <div style={{ padding: '40px', textAlign: 'center', color: 'white' }}>

@@ -10,6 +10,7 @@ const Shop = () => {
   const [sortOrder, setSortOrder] = useState("default");
   const [cartItems, setCartItems] = useState([]);
   const navigate = useNavigate();
+  
 
   useEffect(() => {
     const fetchProducts = async () => {
