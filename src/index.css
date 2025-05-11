@@ -1,2 +1,28 @@
 @import "tailwindcss";
 @plugin "daisyui";
+
+
+
+no-scrollbar {
+  scrollbar-width: none;     /* Firefox */
+  -ms-overflow-style: none;  /* IE and Edge */
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  display: none;             /* Chrome, Safari, Opera */
+}
+
+.hide-horizontal-scrollbar {
+  overflow-x: auto;
+  overflow-y: hidden;
+
+  scrollbar-width: none;          /* Firefox */
+  -ms-overflow-style: none;       /* IE and Edge */
+}
+
+.hide-horizontal-scrollbar::-webkit-scrollbar {
+  height: 0 !important;           /* Chrome, Safari, Opera */
+  display: none;
+}

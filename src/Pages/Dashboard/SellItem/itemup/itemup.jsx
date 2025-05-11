@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import axios from 'axios';
+import { AuthContext } from '../../../../Providers/AuthProviders';
 
 const ItemUpload = () => {
+    const {user} = useContext(AuthContext)
     const [productName, setProductName] = useState('');
     const [description, setDescription] = useState('');
     const [address, setAddress] = useState('');
@@ -31,6 +33,7 @@ const ItemUpload = () => {
                 description,
                 address,
                 phone,
+                useremail: user.email,
                 price: parseFloat(price),
                 image: imageUrl,
                 tag: 'used' 

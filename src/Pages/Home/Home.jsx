@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
 import Banner from './Banner/Banner';
 import Review from '../Review/Review';
+import Promotion from '../Promotion/Promotion';
+import { Element } from 'react-scroll';
 
 const Home = () => {
   useEffect(() => {
@@ -16,6 +18,7 @@ const Home = () => {
     injectScript('https://cdn.botpress.cloud/webchat/v2.5/inject.js');
     injectScript('https://files.bpcontent.cloud/2025/05/03/18/20250503183802-I1967ZVL.js');
 
+
     // Cleanup function to remove the scripts when the component unmounts
     return () => {
       const scripts = document.querySelectorAll(
@@ -25,15 +28,27 @@ const Home = () => {
     };
   }, []);
 
-  return (
+
     <div>
       <div className='bg-[#0D0D2B]'>
         <Banner />
       </div>
       {/* <Products></Products> */}
       <Review />
-    </div>
-  );
+
+
+            
+            {/* <Products></Products> */}
+            <Element name="featured-section">
+                <Promotion />
+            </Element>
+
+            <Element name="review-section">
+                <Review />
+            </Element>
+     </div>
+    );
+
 };
 
 export default Home;
