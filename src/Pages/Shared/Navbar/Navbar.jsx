@@ -55,7 +55,7 @@ const Navbar = () => {
     );
 
     return (
-        <div className="navbar shadow-sm max-w-screen-xl mx-auto">
+        <div className="navbar shadow-sm max-w-screen-xl mx-auto py-4">
             <div className="navbar-start">
                 <div className="dropdown">
                     <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -73,7 +73,7 @@ const Navbar = () => {
                         <li><a>Item 3</a></li>
                     </ul>
                 </div>
-                <img src={icon} alt="" />
+                <img src={icon} alt="" className='h-12'/>
                 <a className="btn btn-ghost text-xl text-[#FE5F75]">SwiftMart</a>
             </div>
             <div className="navbar-center hidden lg:flex">
