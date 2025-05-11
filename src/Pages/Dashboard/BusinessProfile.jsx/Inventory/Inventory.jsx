@@ -80,6 +80,9 @@ const Inventory = () => {
     const handleUpdateProduct = async e => {
         e.preventDefault();
         try {
+            editProductData.quantity = parseInt(editProductData.quantity);
+            editProductData.price = parseFloat(editProductData.price);
+
             await axios.put(`http://localhost:5000/inventory/${editingItem._id}`, editProductData);
             setEditingItem(null);
             setRefresh(!refresh);

@@ -6,14 +6,10 @@ const Wishlist = () => {
     return JSON.parse(localStorage.getItem("wishlist")) || [];
   });
 
-  useEffect(() => {
-    // Save wishlist to localStorage whenever it changes
-    localStorage.setItem("wishlist", JSON.stringify(wishlist));
-  }, [wishlist]);
-
   const removeFromWishlist = (id) => {
     const updatedWishlist = wishlist.filter((item) => item.id !== id);
     setWishlist(updatedWishlist);
+    localStorage.setItem("wishlist", JSON.stringify(updatedWishlist));
   };
 
   return (
@@ -26,7 +22,7 @@ const Wishlist = () => {
           {wishlist.map((product) => (
             <div
               key={product.id}
-              className="border rounded-2xl shadow-md p-4 flex flex-col items-center bg-white"
+              className="border rounded-xl shadow-md p-4 flex flex-col items-center bg-white"
             >
               <img
                 src={product.image}
@@ -34,7 +30,7 @@ const Wishlist = () => {
                 className="w-full h-48 object-contain mb-4"
               />
               <h3 className="text-lg font-semibold mb-1">{product.name}</h3>
-              <p className="text-gray-600 mb-2">${product.price}</p>
+              <p className="text-gray-600 mb-2">{product.price}</p>
               <button
                 onClick={() => removeFromWishlist(product.id)}
                 className="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-md text-sm"
