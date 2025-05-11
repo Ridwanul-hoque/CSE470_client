@@ -42,6 +42,13 @@ const Cart = () => {
   const getTotalItems = () => {
     return cart.reduce((total, item) => total + (item.quantity || 1), 0);
   };
+  const getTotalPrice = () => {
+    return cart.reduce((total, item) => {
+      const qty = item.quantity || 1;
+      return total + item.price * qty;
+    }, 0);
+  };
+
 
   return (
     <div className="cart-page max-w-3xl mx-auto p-4">
@@ -79,6 +86,7 @@ const Cart = () => {
           {/* Total number of items in cart */}
           <div className="mt-4 text-right">
             <p className="font-semibold">Total items: {getTotalItems()}</p>
+            <p className="font-semibold">Total price: ${getTotalPrice()}</p>
           </div>
         </>
       )}

@@ -11,6 +11,7 @@ const Inventory = () => {
     const [refresh, setRefresh] = useState(false);
     const [editingItem, setEditingItem] = useState(null);
     const [editProductData, setEditProductData] = useState({});
+    const [promotedIds, setPromotedIds] = useState([]);
 
     // Fetch business profile
     useEffect(() => {
@@ -26,6 +27,15 @@ const Inventory = () => {
         axios
             .get(`http://localhost:5000/inventory?email=${user?.email}`)
             .then(res => setInventory(res.data));
+    }, [user, refresh]);
+
+    // Fetch promoted item IDs using originalProductId
+    useEffect(() => {
+        axios.get(`http://localhost:5000/promote?email=${user?.email}`)
+            .then(res => {
+                const ids = res.data.map(item => item.originalProductId); // updated line
+                setPromotedIds(ids);
+            });
     }, [user, refresh]);
 
     // Handle business profile form changes
@@ -95,6 +105,19 @@ const Inventory = () => {
     const handleDelete = async id => {
         await axios.delete(`http://localhost:5000/inventory/${id}`);
         setRefresh(!refresh);
+    };
+
+    const handlePromoteToggle = async item => {
+        try {
+            if (promotedIds.includes(item._id)) {
+                await axios.delete(`http://localhost:5000/promote/${item._id}`);
+            } else {
+                await axios.post('http://localhost:5000/promote', item);
+            }
+            setRefresh(!refresh); // Refresh data
+        } catch (err) {
+            console.error('Promote toggle failed:', err);
+        }
     };
 
     return (
@@ -252,7 +275,13 @@ const Inventory = () => {
                                     >
                                         Update
                                     </button>
-                                    <button onClick={() => handleDelete(item._id)} className="text-red-500">Delete</button>
+                                    <button onClick={() => handleDelete(item._id)} className="text-red-500 mr-2">Delete</button>
+                                    <button
+                                        onClick={() => handlePromoteToggle(item)}
+                                        className={`px-2 py-1 rounded ${promotedIds.includes(item._id) ? 'bg-yellow-500 text-white' : 'bg-gray-300 text-black'}`}
+                                    >
+                                        {promotedIds.includes(item._id) ? 'Unpromote' : 'Promote'}
+                                    </button>
                                 </td>
                             </tr>
                         ))}
