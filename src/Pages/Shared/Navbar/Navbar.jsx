@@ -58,7 +58,7 @@ const Navbar = () => {
                 </Link>
             </li>
 
-//             </li> */}
+         
             {/* <li><Link to="/" className='text-[#FE5F75]'>New Products</Link></li> */}
 
         </>
@@ -138,6 +138,7 @@ const Navbar = () => {
                                     Logout
                                 </button>
                             </li>
+                            
                         </ul>
                     </div>
                 ) : (

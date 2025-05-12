@@ -27,6 +27,9 @@ import UserItems from "../Pages/Dashboard/userItems/userItems";
 import Report from "../Pages/Dashboard/Report/Report";
 import AdminReport from "../Pages/Dashboard/AdminReport/AdminReport";
 import ResolvedReport from "../Pages/Dashboard/resolvedReport/resolvedReport";
+import Payment from "../Pages/Payment/Payment";
+// import OrderSummary from "../Pages/Payment/OrderSummary";
+import OrderHistory from "../Pages/Dashboard/OrderHistory/OrderHistory";
 
 
 export const router = createBrowserRouter([
@@ -41,20 +44,25 @@ export const router = createBrowserRouter([
             {
                 path: '/featured',
                 element: <Feature></Feature>
-            }, 
+            },
             {
                 path: '/cart',
-                element: <Cart></Cart>
+                element: <PrivateRoutes><Cart></Cart></PrivateRoutes>
             },
             {
                 path: '/shop', // ✅ Changed to lowercase for consistency
-                element: <Shop></Shop>
+                element: <PrivateRoutes><Shop></Shop></PrivateRoutes>
                 // ✅ OR use this if you want to protect the page:
                 // element: <PrivateRoutes><Shop /></PrivateRoutes>
             },
             {
+                path: '/payment',
+                element: <PrivateRoutes><Payment></Payment></PrivateRoutes>
+            },
+            
+            {
                 path: '/contact',
-                element: <ContactUs></ContactUs>
+                element: <PrivateRoutes><ContactUs></ContactUs></PrivateRoutes>
             },
             {
                 path: '/login',
@@ -80,7 +88,7 @@ export const router = createBrowserRouter([
             },
             {
                 path: 'addReview',
-                element: <PrivateRoutes><AddReview/></PrivateRoutes>
+                element: <PrivateRoutes><AddReview /></PrivateRoutes>
             },
             {
                 path: 'sellItems',
@@ -95,6 +103,10 @@ export const router = createBrowserRouter([
                 element: <PrivateRoutes><Report /></PrivateRoutes>
             },
             {
+                path:'order-history',
+                element: <PrivateRoutes><OrderHistory></OrderHistory></PrivateRoutes>
+            },
+            {
                 path: 'userItems',
                 element: <PrivateRoutes><UserItems></UserItems></PrivateRoutes>
             },
@@ -107,7 +119,7 @@ export const router = createBrowserRouter([
                 path: 'orderTrack', // Added Track route
                 element: <PrivateRoutes><Track /></PrivateRoutes>
             },
-            
+
             {
                 path: 'adminDashboard',
                 element: <AdminRoutes><AdminDashboard /></AdminRoutes>
@@ -125,8 +137,8 @@ export const router = createBrowserRouter([
                 element: <AdminRoutes><AdminReport /></AdminRoutes>
 
             }
-            
-            
+
+
         ]
     }
 ]);
