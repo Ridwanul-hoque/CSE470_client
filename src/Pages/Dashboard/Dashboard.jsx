@@ -101,6 +101,11 @@ const Dashboard = () => {
                                         <CiSquareQuestion /> Your Reports
                                     </NavLink>
                                 </li>
+                                <li>
+                                    <NavLink to="/dashboard/order-history">
+                                        <CiSquareQuestion /> Your Order Items
+                                    </NavLink>
+                                </li>
                                 {/* {/* <li>
                                     <NavLink to="/dashboard/approval">
                                         <GrContactInfo /> Approval

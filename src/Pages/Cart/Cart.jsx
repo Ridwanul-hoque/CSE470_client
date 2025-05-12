@@ -278,17 +278,17 @@ const Cart = () => {
 
       {/* Button to go back to shop */}
       <div className="mt-6 flex justify-between">
-        <Link to="/shop">
+        {/* <Link to="/shop">
           <button className="flex items-center space-x-2 bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors duration-300">
             <ArrowLeft size={16} />
             <span>Back to Shop</span>
           </button>
-        </Link>
+        </Link> */}
         {/* Checkout button */}
         {cart.length > 0 && (
-          <button className="bg-green-600 text-white px-6 py-2 rounded-md hover:bg-green-700 transition-colors duration-300">
+          <Link to={'/payment'} className="bg-green-600 text-white px-6 py-2 rounded-md hover:bg-green-700 transition-colors duration-300">
             Proceed to Checkout
-          </button>
+          </Link>
         )}
       </div>
     </div>
