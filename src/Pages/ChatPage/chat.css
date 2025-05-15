@@ -1,0 +1,72 @@
+/* Chat Container Styling */
+.chat-container {
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: #f4f7fb;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Chat Box */
+.chat-box {
+  background-color: #fff;
+  height: 400px;
+  overflow-y: auto;
+  padding: 15px;
+  border-bottom: 1px solid #ddd;
+}
+
+/* Individual Message */
+.message {
+  padding: 10px;
+  margin-bottom: 8px;
+  background-color: #e9f5ff;
+  border-radius: 8px;
+  font-size: 16px;
+  color: #333;
+}
+
+.message strong {
+  color: #007bff;
+}
+
+/* Input Section */
+.input-container {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  background-color: #fff;
+  border-top: 1px solid #ddd;
+}
+
+/* Message Input */
+.message-input {
+  width: 80%;
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+.message-input:focus {
+  border-color: #007bff;
+}
+
+/* Send Button */
+.send-button {
+  padding: 10px 15px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.send-button:hover {
+  background-color: #0056b3;
+}

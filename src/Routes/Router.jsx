@@ -30,6 +30,8 @@ import ResolvedReport from "../Pages/Dashboard/resolvedReport/resolvedReport";
 import Payment from "../Pages/Payment/Payment";
 // import OrderSummary from "../Pages/Payment/OrderSummary";
 import OrderHistory from "../Pages/Dashboard/OrderHistory/OrderHistory";
+//import ChatWindow from "../Pages/ChatPage/ChatPage";
+import ChatPage from "../Pages/ChatPage/ChatPage";
 
 
 export const router = createBrowserRouter([
@@ -59,7 +61,7 @@ export const router = createBrowserRouter([
                 path: '/payment',
                 element: <PrivateRoutes><Payment></Payment></PrivateRoutes>
             },
-            
+
             {
                 path: '/contact',
                 element: <PrivateRoutes><ContactUs></ContactUs></PrivateRoutes>
@@ -75,7 +77,16 @@ export const router = createBrowserRouter([
             {
                 path: '/wishlist', // Added Wishlist route
                 element: <Wishlist></Wishlist>
+            },
+            {
+                path: '/chatpage', // Added Wishlist route
+                element: <ChatPage></ChatPage>
+            },
+            {
+                path: '/chatpage/:name', // This is correct for dynamic user IDs
+                element: <ChatPage></ChatPage>
             }
+
         ]
     },
     {
@@ -103,7 +114,7 @@ export const router = createBrowserRouter([
                 element: <PrivateRoutes><Report /></PrivateRoutes>
             },
             {
-                path:'order-history',
+                path: 'order-history',
                 element: <PrivateRoutes><OrderHistory></OrderHistory></PrivateRoutes>
             },
             {
