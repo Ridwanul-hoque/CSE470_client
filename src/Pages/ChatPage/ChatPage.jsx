@@ -128,7 +128,7 @@ const ChatPage = () => {
 
   return (
     <div style={{ padding: "20px", maxWidth: "600px", margin: "0 auto" }}>
-      <h2>Chat with a User</h2>
+      <h2>Chatting</h2>
 
       {!selectedUser && <SearchBar onSearch={handleUserFound} />}
 
