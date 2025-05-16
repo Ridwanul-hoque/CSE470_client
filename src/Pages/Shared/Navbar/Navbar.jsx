@@ -131,6 +131,14 @@ const Navbar = () => {
                                 </Link>
                             </li>
                             <li>
+                                <Link to={'/chatpage'}
+                                    
+                                    className="text-[#FE5F75] hover:bg-[#FE5F75]/10"
+                                >
+                                    Chat
+                                </Link>
+                            </li>
+                            <li>
                                 <button
                                     onClick={handlelogout}
                                     className="text-[#FE5F75] hover:bg-[#FE5F75]/10"

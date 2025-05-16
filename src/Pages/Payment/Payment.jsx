@@ -13,7 +13,7 @@
 //             <Elements stripe={stripePromise}>
 
 //             </Elements>
-            
+
 //         </div>
 //     );
 // };
@@ -63,7 +63,7 @@ const Payment = () => {
       if (userItems.length > 0) {
         createPaymentIntent(userItems);
       }
-      
+
       setLoading(false);
     } catch (error) {
       console.error("Failed to fetch cart items:", error);
@@ -74,12 +74,12 @@ const Payment = () => {
   const createPaymentIntent = async (cartItems) => {
     try {
       const total = cartItems.reduce((sum, item) => sum + (item.price * (item.quantity || 1)), 0);
-      
+
       const response = await axios.post('http://localhost:5000/create-payment-intent', {
         amount: total * 100,
         userEmail: user.email
       });
-      
+
       setClientSecret(response.data.clientSecret);
     } catch (error) {
       console.error("Error creating payment intent:", error);
@@ -99,7 +99,7 @@ const Payment = () => {
 
   const handleOrderComplete = async (paymentData) => {
     setOrderProcessing(true);
-    
+
     try {
       await axios.post('http://localhost:5000/history', {
         ...paymentData,
@@ -110,7 +110,7 @@ const Payment = () => {
         orderDate: new Date()
       });
 
-      await Promise.all(cart.map(item => 
+      await Promise.all(cart.map(item =>
         axios.delete(`http://localhost:5000/cart/${item._id}?userEmail=${user.email}`)
       ));
 
@@ -142,10 +142,13 @@ const Payment = () => {
   if (cart.length === 0) {
     return (
       <div className="max-w-3xl mx-auto p-4 text-center">
-        <h1 className="text-2xl font-bold mb-4">Checkout</h1>
+        <h1 className="text-4xl font-extrabold mb-6 text-center text-[#FE5F75] bg-[#0D0D2B] py-4 px-6 rounded-2xl shadow-lg shadow-[#FE5F75]/40 tracking-wide border border-[#FE5F75]/30">
+          ✨ Checkout ✨
+        </h1>
+
         <div className="p-6 border rounded-lg shadow-md bg-gray-50">
           <p className="text-lg mb-4">Your cart is empty.</p>
-          <button 
+          <button
             onClick={() => navigate('/shop')}
             className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition-colors duration-300"
           >
@@ -158,8 +161,11 @@ const Payment = () => {
 
   return (
     <div className="max-w-5xl mx-auto p-4">
-      <h1 className="text-2xl font-bold mb-6">Checkout</h1>
-      
+      <h1 className="text-4xl font-extrabold mb-6 text-center text-[#FE5F75] py-4 px-6 rounded-2xl shadow-lg shadow-[#FE5F75]/40 tracking-wide border border-[#FE5F75]/30">
+        ✨ Checkout ✨
+      </h1>
+
+
       <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
         <div className="md:col-span-5">
           <OrderSummary cart={cart} />
@@ -168,45 +174,43 @@ const Payment = () => {
         <div className="md:col-span-7">
           <div className="bg-white p-6 rounded-lg shadow-md">
             <h2 className="text-xl font-semibold mb-4">Payment Method</h2>
-            
+
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
               <button
-                className={`p-4 border rounded-lg flex flex-col items-center justify-center transition-all ${
-                  paymentMethod === 'online' 
-                    ? 'border-blue-500 bg-blue-50 shadow-md' 
-                    : 'border-gray-200 hover:border-gray-300 hover:bg-gray-50'
-                }`}
+                className={`p-4 border rounded-lg flex flex-col items-center justify-center transition-all ${paymentMethod === 'online'
+                  ? 'border-blue-500 bg-blue-50 shadow-md'
+                  : 'border-gray-200 hover:border-gray-300 hover:bg-gray-50'
+                  }`}
                 onClick={() => handlePaymentMethodChange('online')}
               >
-                <CreditCard className="w-8 h-8 mb-2 text-blue-600" />
+                <CreditCard className="w-8 h-8 mb-2 text-[#FE5F75]" />
                 <span className="font-medium">Online Payment</span>
               </button>
-              
+
               <button
-                className={`p-4 border rounded-lg flex flex-col items-center justify-center transition-all ${
-                  paymentMethod === 'cod' 
-                    ? 'border-blue-500 bg-blue-50 shadow-md' 
-                    : 'border-gray-200 hover:border-gray-300 hover:bg-gray-50'
-                }`}
+                className={`p-4 border rounded-lg flex flex-col items-center justify-center transition-all ${paymentMethod === 'cod'
+                  ? 'border-[#FE5F75] bg-blue-50 shadow-md'
+                  : 'border-gray-200 hover:border-gray-300 hover:bg-gray-50'
+                  }`}
                 onClick={() => handlePaymentMethodChange('cod')}
               >
-                <Truck className="w-8 h-8 mb-2 text-blue-600" />
+                <Truck className="w-8 h-8 mb-2 text-[#FE5F75]" />
                 <span className="font-medium">Cash on Delivery</span>
               </button>
             </div>
-            
+
             <div className={`transition-all duration-300 ${paymentMethod ? 'opacity-100' : 'opacity-0 h-0 overflow-hidden'}`}>
               {paymentMethod === 'online' && clientSecret && (
                 <Elements stripe={stripePromise} options={{ clientSecret }}>
                   <CheckoutForm onOrderComplete={handleOrderComplete} processing={orderProcessing} />
                 </Elements>
               )}
-              
+
               {paymentMethod === 'cod' && (
                 <CashOnDeliveryForm onOrderComplete={handleOrderComplete} processing={orderProcessing} />
               )}
             </div>
-            
+
             {orderComplete && (
               <div className="mt-4 p-4 bg-green-50 text-green-700 rounded-lg border border-green-200 text-center">
                 <p className="font-medium">Order placed successfully! Redirecting...</p>
@@ -219,7 +223,7 @@ const Payment = () => {
       <div className="mt-8">
         <button
           onClick={() => navigate('/cart')}
-          className="flex items-center space-x-2 text-blue-600 hover:text-blue-800 transition-colors"
+          className="flex items-center space-x-2 text-[#FE5F75] hover:text-fuchsia-300 transition-colors"
         >
           <ArrowLeft size={16} />
           <span>Back to Cart</span>

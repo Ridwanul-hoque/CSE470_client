@@ -3,7 +3,7 @@ import axios from 'axios';
 import { AuthContext } from '../../../../Providers/AuthProviders';
 
 const ItemUpload = () => {
-    const {user} = useContext(AuthContext)
+    const { user } = useContext(AuthContext);
     const [productName, setProductName] = useState('');
     const [description, setDescription] = useState('');
     const [address, setAddress] = useState('');
@@ -23,11 +23,9 @@ const ItemUpload = () => {
         formData.append('image', imageFile);
 
         try {
-            // Step 1: Upload image to ImgBB
             const imgResponse = await axios.post(image_hosting_api, formData);
             const imageUrl = imgResponse.data.data.url;
 
-            // Step 2: Send product info to backend
             const itemData = {
                 productName,
                 description,
@@ -36,13 +34,12 @@ const ItemUpload = () => {
                 useremail: user.email,
                 price: parseFloat(price),
                 image: imageUrl,
-                tag: 'used' 
+                tag: 'used'
             };
 
             const res = await axios.post('http://localhost:5000/old', itemData);
             if (res.data.insertedId) {
                 alert('Item uploaded successfully!');
-                // Clear form
                 setProductName('');
                 setDescription('');
                 setAddress('');
@@ -57,80 +54,88 @@ const ItemUpload = () => {
     };
 
     return (
-        <div className="max-w-md mx-auto bg-white p-6 rounded-md shadow-md">
-            <h2 className="text-2xl font-bold mb-4 text-center text-[#FE5F75]">Upload Item</h2>
-            <form onSubmit={handleSubmit}>
-                <div className="mb-4">
-                    <label className="block text-sm font-medium text-gray-700">Product Name</label>
-                    <input
-                        type="text"
-                        value={productName}
-                        onChange={(e) => setProductName(e.target.value)}
-                        className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-[#FE5F75] focus:border-[#FE5F75]"
-                        placeholder="Enter product name"
-                        required
-                    />
-                </div>
-                <div className="mb-4">
-                    <label className="block text-sm font-medium text-gray-700">Description</label>
-                    <input
-                        type="text"
-                        value={description}
-                        onChange={(e) => setDescription(e.target.value)}
-                        className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-[#FE5F75] focus:border-[#FE5F75]"
-                        placeholder="Enter description"
-                        required
-                    />
-                </div>
-                <div className="mb-4">
-                    <label className="block text-sm font-medium text-gray-700">Address</label>
-                    <input
-                        type="text"
-                        value={address}
-                        onChange={(e) => setAddress(e.target.value)}
-                        className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-[#FE5F75] focus:border-[#FE5F75]"
-                        placeholder="Enter Your Address"
-                        required
-                    />
-                </div>
-                <div className="mb-4">
-                    <label className="block text-sm font-medium text-gray-700">Phone</label>
-                    <input
-                        type="text"
-                        value={phone}
-                        onChange={(e) => setPhone(e.target.value)}
-                        className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-[#FE5F75] focus:border-[#FE5F75]"
-                        placeholder="Enter Your Phone Number "
-                        required
-                    />
-                </div>
-                <div className="mb-4">
-                    <label className="block text-sm font-medium text-gray-700">Price</label>
-                    <input
-                        type="number"
-                        value={price}
-                        onChange={(e) => setPrice(e.target.value)}
-                        className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-[#FE5F75] focus:border-[#FE5F75]"
-                        placeholder="Enter price"
-                        required
-                    />
-                </div>
-                <div className="mb-4">
-                    <label className="block text-sm font-medium text-gray-700">Upload Image</label>
-                    <input
-                        type="file"
-                        onChange={(e) => setImageFile(e.target.files[0])}
-                        className="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-[#FE5F75] file:text-white hover:file:bg-[#e04c5f]"
-                        required
-                    />
-                </div>
-                <button
-                    type="submit"
-                    className="w-full bg-[#FE5F75] text-white py-2 px-4 rounded-md hover:bg-[#e04c5f] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#FE5F75]"
-                >
-                    Submit
-                </button>
-            </form>
+        <div className="min-h-screen bg-gradient-to-br from-[#fbeaec] to-[#fff2f3] flex items-center justify-center px-4">
+            <div className="w-full max-w-xl bg-white shadow-2xl rounded-3xl p-8">
+                <h2 className="text-3xl font-extrabold text-center text-[#FE5F75] mb-6">Upload Used Item</h2>
+                <form onSubmit={handleSubmit} className="space-y-5">
+                    <div>
+                        <label className="block text-gray-700 font-medium mb-1">Product Name</label>
+                        <input
+                            type="text"
+                            value={productName}
+                            onChange={(e) => setProductName(e.target.value)}
+                            className="w-full px-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#FE5F75]"
+                            placeholder="Enter product name"
+                            required
+                        />
+                    </div>
+
+                    <div>
+                        <label className="block text-gray-700 font-medium mb-1">Description</label>
+                        <input
+                            type="text"
+                            value={description}
+                            onChange={(e) => setDescription(e.target.value)}
+                            className="w-full px-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#FE5F75]"
+                            placeholder="Enter description"
+                            required
+                        />
+                    </div>
+
+                    <div>
+                        <label className="block text-gray-700 font-medium mb-1">Address</label>
+                        <input
+                            type="text"
+                            value={address}
+                            onChange={(e) => setAddress(e.target.value)}
+                            className="w-full px-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#FE5F75]"
+                            placeholder="Enter your address"
+                            required
+                        />
+                    </div>
+
+                    <div>
+                        <label className="block text-gray-700 font-medium mb-1">Phone</label>
+                        <input
+                            type="text"
+                            value={phone}
+                            onChange={(e) => setPhone(e.target.value)}
+                            className="w-full px-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#FE5F75]"
+                            placeholder="Enter your phone number"
+                            required
+                        />
+                    </div>
+
+                    <div>
+                        <label className="block text-gray-700 font-medium mb-1">Price</label>
+                        <input
+                            type="number"
+                            value={price}
+                            onChange={(e) => setPrice(e.target.value)}
+                            className="w-full px-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#FE5F75]"
+                            placeholder="Enter price"
+                            required
+                        />
+                    </div>
+
+                    <div>
+                        <label className="block text-gray-700 font-medium mb-1">Upload Image</label>
+                        <input
+                            type="file"
+                            onChange={(e) => setImageFile(e.target.files[0])}
+                            className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-sm file:font-semibold file:bg-[#FE5F75] file:text-white hover:file:bg-[#e04c5f]"
+                            required
+                        />
+                    </div>
+
+                    <button
+                        type="submit"
+                        className="w-full py-3 bg-[#FE5F75] text-white text-lg font-semibold rounded-xl shadow-md hover:bg-[#e04c5f] transition duration-300"
+                    >
+                        Submit Item
+                    </button>
+                </form>
+            </div>
         </div>
     );
 };

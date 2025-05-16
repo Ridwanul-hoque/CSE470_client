@@ -29,7 +29,7 @@ const UserItems = () => {
         if (confirm('Are you sure you want to delete this item?')) {
             try {
                 await axios.delete(`http://localhost:5000/old/${id}`);
-                fetchUserItems(); // Refresh
+                fetchUserItems();
             } catch (error) {
                 console.error('Error deleting item:', error);
             }
@@ -37,7 +37,7 @@ const UserItems = () => {
     };
 
     const handleUpdateClick = (item) => {
-        setSelectedItem({ ...item }); // clone item to edit
+        setSelectedItem({ ...item });
         setShowModal(true);
     };
 
@@ -48,7 +48,7 @@ const UserItems = () => {
 
     const handleUpdateSubmit = async (e) => {
         e.preventDefault();
-        const { _id, ...updatePayload } = selectedItem; // Remove _id
+        const { _id, ...updatePayload } = selectedItem;
 
         try {
             await axios.put(`http://localhost:5000/old/${_id}`, updatePayload);
@@ -59,42 +59,41 @@ const UserItems = () => {
         }
     };
 
-
     return (
-        <div className="p-4">
-            <h2 className="text-xl font-semibold mb-4">My Used Items</h2>
-            <div className="overflow-x-auto">
-                <table className="min-w-full table-auto border border-gray-300">
+        <div className="p-6 bg-[#0D0D2B] min-h-screen text-white">
+            <h2 className="text-3xl font-bold mb-6 text-center text-[#FE5F75]">My Used Items</h2>
+            <div className="overflow-x-auto rounded-lg shadow-xl border border-[#FE5F75]">
+                <table className="min-w-full table-auto bg-[#1C1C3A] text-sm rounded-lg overflow-hidden">
                     <thead>
-                        <tr className="bg-gray-100 text-left">
-                            <th className="p-2 border">Image</th>
-                            <th className="p-2 border">Product Name</th>
-                            <th className="p-2 border">Price</th>
-                            <th className="p-2 border">Phone</th>
-                            <th className="p-2 border">Address</th>
-                            <th className="p-2 border">Actions</th>
+                        <tr className="bg-[#FE5F75] text-white uppercase tracking-wide text-xs">
+                            <th className="p-3">Image</th>
+                            <th className="p-3">Product</th>
+                            <th className="p-3">Price</th>
+                            <th className="p-3">Phone</th>
+                            <th className="p-3">Address</th>
+                            <th className="p-3">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
                         {items.map(item => (
-                            <tr key={item._id}>
-                                <td className="p-2 border">
-                                    <img src={item.image} alt={item.productName} className="w-16 h-16 object-cover" />
+                            <tr key={item._id} className="hover:bg-[#2E2E52] transition duration-200">
+                                <td className="p-3 text-center">
+                                    <img src={item.image} alt={item.productName} className="w-14 h-14 object-cover rounded-md border-2 border-[#FE5F75]" />
                                 </td>
-                                <td className="p-2 border">{item.productName}</td>
-                                <td className="p-2 border">{item.price} BDT</td>
-                                <td className="p-2 border">{item.phone}</td>
-                                <td className="p-2 border">{item.address}</td>
-                                <td className="p-2 border">
+                                <td className="p-3">{item.productName}</td>
+                                <td className="p-3">{item.price} BDT</td>
+                                <td className="p-3">{item.phone}</td>
+                                <td className="p-3">{item.address}</td>
+                                <td className="p-3 space-x-2">
                                     <button
                                         onClick={() => handleUpdateClick(item)}
-                                        className="bg-blue-500 text-white px-2 py-1 rounded mr-2"
+                                        className="px-3 py-1 bg-[#FE5F75] text-white rounded hover:scale-105 transition-transform"
                                     >
                                         Update
                                     </button>
                                     <button
                                         onClick={() => handleDelete(item._id)}
-                                        className="bg-red-500 text-white px-2 py-1 rounded"
+                                        className="px-3 py-1 bg-red-600 text-white rounded hover:scale-105 transition-transform"
                                     >
                                         Delete
                                     </button>
@@ -103,7 +102,7 @@ const UserItems = () => {
                         ))}
                         {items.length === 0 && (
                             <tr>
-                                <td colSpan="6" className="text-center p-4">
+                                <td colSpan="6" className="text-center p-5 text-gray-300">
                                     No items found.
                                 </td>
                             </tr>
@@ -114,7 +113,7 @@ const UserItems = () => {
 
             {/* Update Modal */}
             <Transition appear show={showModal} as={Fragment}>
-                <Dialog as="div" className="relative z-10" onClose={() => setShowModal(false)}>
+                <Dialog as="div" className="relative z-50" onClose={() => setShowModal(false)}>
                     <Transition.Child
                         as={Fragment}
                         enter="ease-out duration-300"
@@ -124,11 +123,11 @@ const UserItems = () => {
                         leaveFrom="opacity-100"
                         leaveTo="opacity-0"
                     >
-                        <div className="fixed inset-0 bg-black bg-opacity-25" />
+                        <div className="fixed inset-0 bg-black bg-opacity-60" />
                     </Transition.Child>
 
                     <div className="fixed inset-0 overflow-y-auto">
-                        <div className="flex min-h-full items-center justify-center p-4 text-center">
+                        <div className="flex min-h-full items-center justify-center p-6 text-center">
                             <Transition.Child
                                 as={Fragment}
                                 enter="ease-out duration-300"
@@ -138,31 +137,28 @@ const UserItems = () => {
                                 leaveFrom="opacity-100 scale-100"
                                 leaveTo="opacity-0 scale-95"
                             >
-                                <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
-                                    <Dialog.Title
-                                        as="h3"
-                                        className="text-lg font-medium leading-6 text-gray-900 mb-4"
-                                    >
+                                <Dialog.Panel className="w-full max-w-lg transform overflow-hidden rounded-xl bg-[#1C1C3A] p-6 text-left shadow-xl transition-all text-white border border-[#FE5F75]">
+                                    <Dialog.Title className="text-2xl font-semibold mb-4 text-[#FE5F75]">
                                         Update Item
                                     </Dialog.Title>
-                                    <form onSubmit={handleUpdateSubmit} className="space-y-3">
-                                        <input type="text" name="productName" value={selectedItem?.productName || ''} onChange={handleChange} placeholder="Product Name" className="w-full border p-2" required />
-                                        <input type="number" name="price" value={selectedItem?.price || ''} onChange={handleChange} placeholder="Price" className="w-full border p-2" required />
-                                        <textarea name="description" value={selectedItem?.description || ''} onChange={handleChange} placeholder="Description" className="w-full border p-2" required />
-                                        <input type="text" name="phone" value={selectedItem?.phone || ''} onChange={handleChange} placeholder="Phone" className="w-full border p-2" required />
-                                        <input type="text" name="address" value={selectedItem?.address || ''} onChange={handleChange} placeholder="Address" className="w-full border p-2" required />
-                                        <input type="text" name="image" value={selectedItem?.image || ''} onChange={handleChange} placeholder="Image URL" className="w-full border p-2" required />
-                                        <div className="mt-4 flex justify-end space-x-2">
+                                    <form onSubmit={handleUpdateSubmit} className="space-y-4">
+                                        <input type="text" name="productName" value={selectedItem?.productName || ''} onChange={handleChange} placeholder="Product Name" className="w-full bg-[#0D0D2B] border border-[#FE5F75] text-white p-2 rounded" required />
+                                        <input type="number" name="price" value={selectedItem?.price || ''} onChange={handleChange} placeholder="Price" className="w-full bg-[#0D0D2B] border border-[#FE5F75] text-white p-2 rounded" required />
+                                        <textarea name="description" value={selectedItem?.description || ''} onChange={handleChange} placeholder="Description" className="w-full bg-[#0D0D2B] border border-[#FE5F75] text-white p-2 rounded" required />
+                                        <input type="text" name="phone" value={selectedItem?.phone || ''} onChange={handleChange} placeholder="Phone" className="w-full bg-[#0D0D2B] border border-[#FE5F75] text-white p-2 rounded" required />
+                                        <input type="text" name="address" value={selectedItem?.address || ''} onChange={handleChange} placeholder="Address" className="w-full bg-[#0D0D2B] border border-[#FE5F75] text-white p-2 rounded" required />
+                                        <input type="text" name="image" value={selectedItem?.image || ''} onChange={handleChange} placeholder="Image URL" className="w-full bg-[#0D0D2B] border border-[#FE5F75] text-white p-2 rounded" required />
+                                        <div className="mt-6 flex justify-end space-x-3">
                                             <button
                                                 type="button"
-                                                className="bg-gray-300 px-4 py-2 rounded"
+                                                className="px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600"
                                                 onClick={() => setShowModal(false)}
                                             >
                                                 Cancel
                                             </button>
                                             <button
                                                 type="submit"
-                                                className="bg-blue-600 text-white px-4 py-2 rounded"
+                                                className="px-4 py-2 bg-[#FE5F75] text-white rounded hover:scale-105 transition-transform"
                                             >
                                                 Save Changes
                                             </button>

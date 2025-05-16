@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import SearchBar from "./SearchUser";
 import { db } from "../../firebase/firebase.config";
 import { getAuth } from "firebase/auth";
+import { GiChatBubble } from "react-icons/gi";
+
 import {
   collection,
   query,
@@ -11,6 +13,7 @@ import {
   addDoc,
   serverTimestamp,
 } from "firebase/firestore";
+import { FaChartArea } from "react-icons/fa";
 
 const auth = getAuth();
 
@@ -128,7 +131,11 @@ const ChatPage = () => {
 
   return (
     <div style={{ padding: "20px", maxWidth: "600px", margin: "0 auto" }}>
-      <h2>Chat with a User</h2>
+      <h2 className="flex items-center gap-3 bg-gradient-to-r from-[#0D0D2B] via-[#1A1A40] to-[#0D0D2B] text-3xl font-extrabold text-[#FE5F75] rounded-3xl p-5 shadow-lg hover:shadow-pink-500/50 transition-all duration-300">
+        <GiChatBubble className="text-[#FE5F75] text-4xl animate-bounce" />
+        Chat with a User
+      </h2>
+
 
       {!selectedUser && <SearchBar onSearch={handleUserFound} />}
 

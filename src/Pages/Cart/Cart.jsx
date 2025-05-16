@@ -230,7 +230,7 @@ const Cart = () => {
           <p className="text-lg mb-4">Your cart is empty.</p>
           <p className="text-gray-600 mb-6">Add some great products to your cart!</p>
           <Link to="/shop">
-            <button className="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 transition-colors duration-300">
+            <button className="bg-gradient-to-br from-[#FE5F75] to-[#0D0D2B] hover:from-[#FF7A85] hover:to-[#1A1A40] text-white px-6 py-2 rounded-md transition-colors duration-300">
               Browse Products
             </button>
           </Link>

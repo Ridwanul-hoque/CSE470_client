@@ -18,7 +18,7 @@ const BusinessProfile = () => {
                 const matchedBusiness = response.data.find(
                     b => b.email === user.email && b.status === 'business'
                 );
-                setIsBusiness(!!matchedBusiness); // true if match found, false otherwise
+                setIsBusiness(!!matchedBusiness); 
                 setLoading(false);
             } catch (error) {
                 console.error('Error checking business status:', error);

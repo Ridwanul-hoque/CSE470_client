@@ -208,6 +208,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { AuthContext } from "../../Providers/AuthProviders";
 import { ShoppingCart } from 'lucide-react';
+import Swal from "sweetalert2";
 
 const Shop = () => {
   const { user } = useContext(AuthContext);
@@ -216,7 +217,7 @@ const Shop = () => {
   const [sortOrder, setSortOrder] = useState("default");
   const [cartItems, setCartItems] = useState([]);
   const navigate = useNavigate();
-  
+
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -303,9 +304,9 @@ const Shop = () => {
 
   const isProductDisabled = (product) => {
     if (!user) return false;
-    
+
     if (product.tag === "used") {
-      return cartItems.some(item => 
+      return cartItems.some(item =>
         item._id === product._id && item.userEmail === user.email
       );
     }
@@ -332,6 +333,48 @@ const Shop = () => {
   // Get user-specific cart count
   const userCartCount = user ? cartItems.filter(item => item.userEmail === user.email).length : 0;
 
+
+
+  const handleAddToWishlist = async (product) => {
+    if (!user) {
+      alert("Please log in to add to wishlist");
+      return;
+    }
+
+    try {
+      await axios.post("http://localhost:5000/wish", {
+        ...product,
+        useremail: user.email
+      });
+      Swal.fire({
+        icon: 'success',
+        title: 'Added To Your Wishlist!!!',
+        text: 'This product is in your wishlist.',
+        confirmButtonText: 'Perfect!',
+        confirmButtonColor: '#e67e22',
+        timer: 2000,
+        timerProgressBar: true,
+      });
+
+    } catch (error) {
+      if (error.response?.status === 409) {
+        Swal.fire({
+          icon: 'warning',
+          title: 'Already Added!',
+          text: 'This product is already in your wishlist.',
+          confirmButtonText: 'Got it!',
+          confirmButtonColor: '#e67e22',
+          timer: 2000,
+          timerProgressBar: true,
+        });
+
+      } else {
+        console.error("Failed to add to wishlist:", error);
+      }
+    }
+  };
+
+
   return (
     <div className="max-w-6xl mx-auto p-4 relative">
       <h2 className="text-2xl font-bold mb-4">Shop</h2>
@@ -349,6 +392,7 @@ const Shop = () => {
             key={product._id}
             product={product}
             onAddToCart={handleAddToCart}
+            onAddToWishlist={handleAddToWishlist}
             disabled={isProductDisabled(product)}
           />
         ))}
@@ -361,6 +405,7 @@ const Shop = () => {
             key={product._id}
             product={product}
             onAddToCart={handleAddToCart}
+            onAddToWishlist={handleAddToWishlist}
             disabled={isProductDisabled(product)}
           />
         ))}
@@ -372,11 +417,19 @@ const Shop = () => {
             alert("Please log in to view your cart");
             return;
           }
-          
+
           if (userCartCount > 0) {
             navigate("/cart");
           } else {
-            alert("No products in your cart.");
+            Swal.fire({
+              icon: 'info',
+              title: 'Your cart is empty!',
+              text: 'Looks like you haven’t added any products yet.',
+              showConfirmButton: true,
+              confirmButtonText: 'Browse Products',
+              confirmButtonColor: '#6c5ce7',
+              backdrop: true,
+            });
           }
         }}
         className="fixed top-5 right-5 bg-[#FE5F75] text-white px-4 py-3 rounded-full shadow-lg flex items-center space-x-2 hover:bg-blue-700 transition-colors duration-300 z-50"
