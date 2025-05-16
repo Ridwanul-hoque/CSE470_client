@@ -52,10 +52,9 @@ export const router = createBrowserRouter([
                 element: <PrivateRoutes><Cart></Cart></PrivateRoutes>
             },
             {
-                path: '/shop', // ✅ Changed to lowercase for consistency
+                path: '/shop', 
                 element: <PrivateRoutes><Shop></Shop></PrivateRoutes>
-                // ✅ OR use this if you want to protect the page:
-                // element: <PrivateRoutes><Shop /></PrivateRoutes>
+                
             },
             {
                 path: '/payment',
@@ -76,15 +75,15 @@ export const router = createBrowserRouter([
             },
             {
                 path: '/wishlist', // Added Wishlist route
-                element: <Wishlist></Wishlist>
+                element: <PrivateRoutes><Wishlist></Wishlist></PrivateRoutes>
             },
             {
                 path: '/chatpage', // Added Wishlist route
-                element: <ChatPage></ChatPage>
+                element: <PrivateRoutes><ChatPage></ChatPage></PrivateRoutes>
             },
             {
                 path: '/chatpage/:name', // This is correct for dynamic user IDs
-                element: <ChatPage></ChatPage>
+                element: <PrivateRoutes><ChatPage></ChatPage></PrivateRoutes>
             }
 
         ]

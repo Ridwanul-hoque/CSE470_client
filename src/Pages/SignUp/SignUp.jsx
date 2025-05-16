@@ -7,6 +7,8 @@ import Swal from 'sweetalert2';
 
 const SignUp = () => {
     const { createUser, updateUserProfile } = useContext(AuthContext);
+    const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
+    const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`
     const navigate = useNavigate();
     const {
         register,
@@ -14,38 +16,58 @@ const SignUp = () => {
         formState: { errors },
     } = useForm();
 
-    const onSubmit = (data) => {
-        createUser(data.email, data.password)
-            .then((result) => {
-                updateUserProfile(data.name, data.photoURL)
-                    .then(() => {
-                        const userInfo = {
-                            name: data.name,
-                            email: data.email,
-                            phone: data.phone,
-                            image: data.image,
-                        };
-                        fetch('http://localhost:5000/users', {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json',
-                            },
-                            body: JSON.stringify(userInfo),
-                        })
-                            .then((res) => res.json())
-                            .then(() => {
-                                Swal.fire({
-                                    position: "top-end",
-                                    icon: "success",
-                                    title: "Successfully Signed Up!",
-                                    showConfirmButton: false,
-                                    timer: 1500,
-                                });
-                                navigate('/');
-                            });
-                    })
-                    .catch((error) => console.log(error));
+    const onSubmit = async (data) => {
+        const imageFile = data.image[0]
+        const formData = new FormData()
+        formData.append('image', imageFile);
+        try {
+            const res = await fetch(image_hosting_api, {
+                method: 'POST',
+                body: formData,
             });
+
+            const imgResponse = await res.json();
+
+            if (imgResponse.success) {
+                const imageURL = imgResponse.data.display_url;
+
+                createUser(data.email, data.password)
+                    .then(() => {
+                        updateUserProfile(data.name, imageURL)
+                            .then(() => {
+                                const userInfo = {
+                                    name: data.name,
+                                    email: data.email,
+                                    phone: data.phone,
+                                    image: imageURL,
+                                };
+                                fetch('http://localhost:5000/users', {
+                                    method: 'POST',
+                                    headers: {
+                                        'Content-Type': 'application/json',
+                                    },
+                                    body: JSON.stringify(userInfo),
+                                })
+                                    .then((res) => res.json())
+                                    .then(() => {
+                                        Swal.fire({
+                                            position: "top-end",
+                                            icon: "success",
+                                            title: "Successfully Signed Up!",
+                                            showConfirmButton: false,
+                                            timer: 1500,
+                                        });
+                                        navigate('/');
+                                    });
+                            })
+                            .catch((error) => console.log(error));
+                    });
+
+            }
+        } catch (error) {
+            console.error("Image Upload Failed", error)
+        }
+
     };
 
     return (
@@ -87,7 +109,7 @@ const SignUp = () => {
                         <div>
                             <label className="block text-gray-700 font-medium">Profile Image URL</label>
                             <input
-                                type="text"
+                                type="file"
                                 {...register("image", { required: true })}
                                 className="w-full mt-1 px-4 py-2 border rounded-lg focus:ring-2 focus:ring-[#FE5F75] focus:outline-none"
                                 placeholder="Enter image URL (imgbb preferred)"

@@ -16,13 +16,11 @@ const Report = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     let imageURL = '';
 
     if (imageFile) {
       const formData = new FormData();
       formData.append('image', imageFile);
-
       try {
         const imgRes = await fetch(image_hosting_api, {
           method: 'POST',
@@ -60,7 +58,6 @@ const Report = () => {
 
       if (res.ok) {
         toast.success('✅ Report submitted successfully!', { position: 'top-center' });
-        // Reset form
         setReportType('');
         setPaymentMethod('');
         setProductType('');
@@ -76,98 +73,109 @@ const Report = () => {
   };
 
   return (
-    <div className="max-w-xl mx-auto p-6 bg-white shadow-md rounded-lg mt-6">
-      <h2 className="text-2xl font-bold mb-4 text-center text-gray-800">Submit a Report</h2>
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#0D0D2B] to-[#FE5F75] py-10 px-4">
+      <div className="w-full max-w-xl bg-white bg-opacity-10 backdrop-blur-md border border-[#FE5F75]/20 p-8 rounded-3xl shadow-xl text-white">
+        <h2 className="relative text-4xl font-extrabold text-center mb-8 text-gradient 
+    before:absolute before:-bottom-2 before:left-1/2 before:w-24 before:h-1 before:bg-gradient-to-r before:from-purple-400 before:via-pink-400 before:to-red-400 before:rounded-full before:shadow-lg before:transform before:-translate-x-1/2 before:animate-pulse text-[#0D0D2B]">Submit a Report</h2>
 
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <div>
-          <label className="block font-medium text-gray-700 mb-1">Name</label>
-          <input type="text" value={user.displayName} disabled className="w-full border p-2 rounded bg-gray-100" />
-        </div>
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <div>
+            <label className="block font-semibold mb-1">Name</label>
+            <input
+              type="text"
+              value={user.displayName}
+              disabled
+              className="w-full bg-white/20 border border-[#FE5F75]/30 p-2 rounded-md text-black"
+            />
+          </div>
 
-        <div>
-          <label className="block font-medium text-gray-700 mb-1">Email</label>
-          <input type="email" value={user.email} disabled className="w-full border p-2 rounded bg-gray-100" />
-        </div>
+          <div>
+            <label className="block font-semibold mb-1">Email</label>
+            <input
+              type="email"
+              value={user.email}
+              disabled
+              className="w-full bg-white/20 border border-[#FE5F75]/30 p-2 rounded-md text-black"
+            />
+          </div>
 
-        <div>
-          <label className="block font-medium text-gray-700 mb-1">Report Type</label>
-          <select
-            value={reportType}
-            onChange={(e) => setReportType(e.target.value)}
-            required
-            className="w-full border p-2 rounded"
+          <div>
+            <label className="block font-semibold mb-1">Report Type</label>
+            <select
+              value={reportType}
+              onChange={(e) => setReportType(e.target.value)}
+              required
+              className="w-full bg-white/20 border border-[#FE5F75]/30 p-2 rounded-md text-black"
+            >
+              <option value="">Select Type</option>
+              <option value="product">Product Related</option>
+              <option value="payment">Payment Related</option>
+            </select>
+          </div>
+
+          {reportType === 'payment' && (
+            <div>
+              <label className="block font-semibold mb-1">Payment Method</label>
+              <select
+                value={paymentMethod}
+                onChange={(e) => setPaymentMethod(e.target.value)}
+                required
+                className="w-full bg-white/20 border border-[#FE5F75]/30 p-2 rounded-md text-black"
+              >
+                <option value="">Select Method</option>
+                <option value="online">Online</option>
+                <option value="cod">Cash on Delivery</option>
+              </select>
+            </div>
+          )}
+
+          {reportType === 'product' && (
+            <div>
+              <label className="block font-semibold mb-1">Product Type</label>
+              <select
+                value={productType}
+                onChange={(e) => setProductType(e.target.value)}
+                required
+                className="w-full bg-white/20 border border-[#FE5F75]/30 p-2 rounded-md text-black"
+              >
+                <option value="">Select Product Type</option>
+                <option value="old">Old Items</option>
+                <option value="retail">Retail Items</option>
+              </select>
+            </div>
+          )}
+
+          <div>
+            <label className="block font-semibold mb-1">Description</label>
+            <textarea
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+              required
+              className="w-full bg-white/20 border border-[#FE5F75]/30 p-2 rounded-md text-black"
+              rows="4"
+              placeholder="Explain the issue in detail..."
+            />
+          </div>
+
+          <div>
+            <label className="block font-semibold mb-1">Attach Image (optional)</label>
+            <input
+              type="file"
+              accept="image/*"
+              onChange={(e) => setImageFile(e.target.files[0])}
+              className="w-full bg-white/20 border border-[#FE5F75]/30 p-2 rounded-md text-black file:text-black file:bg-[#FE5F75] file:border-none"
+            />
+          </div>
+
+          <button
+            type="submit"
+            className="w-full py-3 rounded-md bg-[#FE5F75] hover:bg-[#e64b61] font-semibold text-black shadow-md transition duration-300 transform hover:scale-105"
           >
-            <option value="">Select Type</option>
-            <option value="product">Product Related</option>
-            <option value="payment">Payment Related</option>
-          </select>
-        </div>
-
-        {reportType === 'payment' && (
-          <div>
-            <label className="block font-medium text-gray-700 mb-1">Payment Method</label>
-            <select
-              value={paymentMethod}
-              onChange={(e) => setPaymentMethod(e.target.value)}
-              required
-              className="w-full border p-2 rounded"
-            >
-              <option value="">Select Method</option>
-              <option value="online">Online</option>
-              <option value="cod">Cash on Delivery</option>
-            </select>
-          </div>
-        )}
-
-        {reportType === 'product' && (
-          <div>
-            <label className="block font-medium text-gray-700 mb-1">Product Type</label>
-            <select
-              value={productType}
-              onChange={(e) => setProductType(e.target.value)}
-              required
-              className="w-full border p-2 rounded"
-            >
-              <option value="">Select Product Type</option>
-              <option value="old">Old Items</option>
-              <option value="retail">Retail Items</option>
-            </select>
-          </div>
-        )}
-
-        <div>
-          <label className="block font-medium text-gray-700 mb-1">Description</label>
-          <textarea
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-            required
-            className="w-full border p-2 rounded"
-            rows="4"
-            placeholder="Explain the issue in detail..."
-          />
-        </div>
-        
-
-        <div>
-          <label className="block font-medium text-gray-700 mb-1">Attach Image (Attach The Related Items Image)*</label>
-          <input
-            type="file"
-            accept="image/*"
-            onChange={(e) => setImageFile(e.target.files[0])}
-            className="w-full border p-2 rounded"
-          />
-        </div>
-
-        <button
-          type="submit"
-          className="w-full bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 transition"
-        >
-          Submit Report
-        </button>
-      </form>
-
-      <ToastContainer />
+            🚀 Submit Report
+          </button>
+        </form>
+        <ToastContainer />
+      </div>
     </div>
   );
 };

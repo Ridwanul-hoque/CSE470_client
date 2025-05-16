@@ -12,37 +12,42 @@ const Promotion = () => {
     }, []);
 
     return (
-        <div className="p-6 max-w-screen-xl mx-auto">
-            <h2 className="text-3xl font-bold text-[#FE5F75] mb-6 text-center">🔥 Featured Products</h2>
-            
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="p-6 max-w-screen-xl mx-auto bg-gradient-to-b min-h-screen text-white my-12">
+            <h2 className="text-4xl font-extrabold text-[#FE5F75] mb-10 text-center drop-shadow-lg tracking-wide">
+                ---- Featured Products ----
+            </h2>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
                 {promotedProducts.map(product => (
                     <div
                         key={product._id}
-                        className="rounded-2xl shadow-lg overflow-hidden bg-white/30 backdrop-blur-md border border-white/20 hover:shadow-xl transition-all duration-300"
+                        className="rounded-2xl bg-[#0D0D2B] border border-[#FE5F75]/40 relative overflow-hidden shadow-lg hover:scale-[1.02] transition-transform duration-300"
                     >
-                        <img
-                            src={product.image}
-                            alt={product.productName}
-                            className="w-full h-48 object-cover"
-                        />
-                        <div className="p-5 space-y-2">
-                            <h3 className="text-xl font-semibold text-[#FE5F75]">{product.productName}</h3>
-                            <p className="text-sm text-gray-500 uppercase">{product.productType}</p>
-                            <p className="text-gray-700 text-sm">{product.description}</p>
-                            <div className="flex justify-between items-center pt-2">
-                                <span className="text-lg text-green-600 font-bold">${product.price}</span>
-                                <span className="text-sm text-gray-600">Qty: {product.quantity}</span>
+                        <div className="relative group">
+                            <img
+                                src={product.image}
+                                alt={product.productName}
+                                className="w-full h-52 object-cover rounded-t-2xl transition-transform duration-500 group-hover:scale-105"
+                            />
+                            
+                        </div>
+                        <div className="p-5 space-y-3">
+                            <h3 className="text-2xl font-bold text-[#FE5F75] tracking-wide">{product.productName}</h3>
+                            <p className="text-xs uppercase text-[#FE5F75]/70">{product.productType}</p>
+                            <p className="text-sm text-gray-300">{product.description}</p>
+                            <div className="flex justify-between items-center pt-2 border-t border-[#FE5F75]/20 mt-2">
+                                <span className="text-xl font-extrabold text-green-400">${product.price}</span>
+                                <span className="text-sm text-gray-400">Qty: {product.quantity}</span>
                             </div>
                         </div>
                     </div>
                 ))}
             </div>
 
-            <div className="mt-8 text-center">
+            <div className="mt-12 text-center">
                 <Link
                     to="/shop"
-                    className="inline-block bg-[#FE5F75] text-white px-6 py-2 rounded-full shadow-md hover:bg-[#e14b61] transition"
+                    className="inline-block bg-gradient-to-br from-[#FE5F75] to-[#0D0D2B] hover:from-[#FF7A85] hover:to-[#1A1A40] text-white px-8 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 tracking-wider hover:scale-105"
                 >
                     See More in Shop
                 </Link>
